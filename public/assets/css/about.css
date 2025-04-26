@@ -1,0 +1,313 @@
+/* === ABOUT TEXT VISIBLE & AÉRÉ === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;    /* prend tout l’espace restant */
+  margin: 0;
+  padding: 0;
+}
+
+footer.site-footer {
+  flex-shrink: 0;     /* ne se réduit pas */
+  margin: 0;          /* pas de marge au-dessus */
+  padding-top: 1.5rem;/* ton padding interne */
+  background: var(--color-dark);
+}
+
+.about-hero {
+  background: var(--color-dark);
+  color: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;             /* comme tu l’as réglé */
+  min-height: 180px;        /* pour éviter que ça devienne vraiment trop petit */
+  padding: 0 1rem;          /* un peu de marge latérale si besoin */
+  text-align: center;
+}
+
+/* Ajustement du titre si la bannière est plus courte */
+.about-hero h1 {
+  font-size: 2.2rem;        /* réduit légèrement */
+  margin: 0;
+}
+
+/* Mobile : bannières encore plus compactes */
+@media (max-width: 768px) {
+  .about-hero {
+    height: 25vh;
+    min-height: 140px;
+  }
+  .about-hero h1 {
+    font-size: 1.8rem;
+  }
+}
+
+.about-text {
+  color: var(--color-dark);
+  background: var(--color-light);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* === CARROUSEL PHOTOS À PROPOS (TAILLE UNIFORME) === */
+.about-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  background: var(--color-light);
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  flex: none;
+  width: 300px;       /* largeur fixe desktop */
+  height: 200px;      /* hauteur fixe desktop */
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-slide img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* === FLÈCHES DE NAVIGATION === */
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: rgba(0,0,0,0.7);
+  opacity: 1;
+}
+
+.carousel-prev {
+  left: 1rem;
+}
+
+.carousel-next {
+  right: 1rem;
+}
+
+/* Wrapper commun pour superposition */
+.about-section {
+  display: block;  /* par défaut en bloc pour desktop */
+  position: relative;
+}
+
+/* Mobile uniquement : grid pour superposer */
+@media (max-width: 768px) {
+  .about-section {
+    display: grid;
+  }
+  .about-section > section {
+    grid-area: 1 / 1;      /* toutes les sections partagent la même cellule */
+  }
+
+  /* Texte au-dessus du carrousel */
+  .about-text {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.85); /* fond semi-opaque pour lisibilité */
+    padding: 1.5rem;
+    margin: 1rem;                     /* espace autour du texte */
+    border-radius: 8px;
+  }
+
+  /* Le carrousel reste en dessous, sans modification */
+  .about-carousel {
+    margin: 0;    /* supprime son margin-top sur mobile */
+  }
+}
+
+/* === ADJUSTMENTS RESPONSIVE === */
+@media (max-width: 768px) {
+  .about-text {
+    padding: 1.5rem 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .carousel-slide {
+    width: 80vw;    /* slide prend 80% de l'écran */
+    max-width: none;
+    height: 180px;
+  }
+  /* on cache les flèches sur mobile */
+  .carousel-prev,
+  .carousel-next {
+    display: none;
+  }
+}
+
+/* === AMÉLIORATION LECTURE ABOUT-TEXT SUR MOBILE === */
+@media (max-width: 768px) {
+  .about-text {
+    background: var(--color-light);
+    padding: 2rem 1.5rem;       /* plus de respiration */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 0 0 2rem;           /* espace sous le bloc */
+  }
+  .about-text p {
+    font-size: 1.05rem;         /* un peu plus grand */
+    line-height: 1.8;           /* espacement inter-ligne renforcé */
+    margin-bottom: 1rem;
+    color: var(--color-dark);
+  }
+  .about-text ul {
+    margin: 1rem 0;
+    padding-left: 1.25rem;      /* indent plus franc */
+  }
+  .about-text li {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* === ESPACEMENT MAXIMAL SUR MOBILE ENTRE ABOUT-TEXT ET CAROUSEL === */
+@media (max-width: 768px) {
+  .about-text {
+    margin-bottom: 6rem !important;  /* plus d’air avant le carrousel */
+    padding: 2.5rem 1.5rem;           /* un peu plus de padding vertical */
+  }
+  .about-carousel {
+    margin-top: 5rem !important;     /* espace au-dessus du carrousel */
+  }
+}
+
+
+/* === ESAPCEMENT ENTRE ABOUT-TEXT ET CAROUSEL === */
+@media (max-width: 768px) {
+  .about-text {
+    margin-bottom: 3rem;   /* passe de 1.5 – 2rem à 3rem pour plus d’air */
+  }
+  .about-carousel {
+    margin-top: 2rem;      /* ajoute une marge au-dessus du carrousel */
+  }
+}
+
+/* Si tu veux que ce soit plus aéré aussi sur desktop, tu peux : */
+@media (min-width: 769px) {
+  .about-text {
+    margin-bottom: 4rem;
+  }
+  .about-carousel {
+    margin-top: 3rem;
+  }
+}
+
+/* ————————————————
+   Supprimer l’espace sous le carousel
+   ———————————————— */
+
+/* 1) Pas de padding ni margin sur la section carousel elle-même */
+.about-carousel.photo-slider {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 2) Si la section utilise la classe .container, on l’efface aussi */
+.about-carousel.container {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 3) Pas de padding/margin sur le container interne du slider */
+.about-carousel .slider-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 4) On s’assure que le main n’ajoute pas d’espace */
+main {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 5) Le footer doit démarrer immédiatement */
+.site-footer {
+  margin-top: 0 !important;
+}
+
+/* ——— ZÉRO ESPACE ENTRE CAROUSEL ET FOOTER ——— */
+
+/* 1) La section carrousel ne doit plus avoir de marge ou padding bas */
+.about-carousel.photo-slider {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2) Si tu as un wrapper .container autour, on l’annule aussi */
+.about-carousel.photo-slider.container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 3) Ton slider‐container n’ajoute rien en bas non plus */
+.about-carousel.photo-slider .slider-container {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 4) Chaque slide ne doit pas créer d’espace */
+.about-carousel.photo-slider .slide {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 5) Assure-toi que le main et la dernière section ne poussent pas ton footer */
+main,
+main > section,
+main > section:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 6) Colle le footer immédiatement sous le contenu */
+footer.site-footer {
+  margin-top: 0 !important;
+}

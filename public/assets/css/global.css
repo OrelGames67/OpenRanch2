@@ -1,0 +1,913 @@
+/* === VARIABLES COULEURS === */
+:root {
+  --color-bg: #F7F3E9;
+  --color-text: #FFFFFF;
+  --color-dark: #1E1C44;          /* Bleu foncé comme Wix */
+  --color-accent: #9D4EDD;        /* Violet accent comme Wix */
+  --color-logo-green: #55AD32;    /* Vert du logo */
+  --font-body: 'Lora', serif;
+  --font-heading: 'Playfair Display', serif;
+}
+
+/* === RESET & BASE === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+/* === HEADER === */
+.site-header {
+  background: var(--color-dark);
+  color: var(--color-text);
+  padding: 1rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 50px;
+}
+
+/* NAVIGATION DESKTOP */
+.main-nav .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav .nav-links li a {
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.main-nav .nav-links li a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.3s;
+  margin-top: 5px;
+}
+
+.main-nav .nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* === BURGER === */
+.burger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+/* === BLOQUE LE SCROLL quand le burger est ouvert === */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* === ANIMATION BURGER === */
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* === NAVIGATION MOBILE === */
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1000;
+  }
+
+  .nav-active {
+    transform: translateX(0);
+  }
+}
+
+/* === MAINTENANCE MODE === */
+.maintenance-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 10000;
+  font-family: var(--font-body);
+}
+
+.maintenance-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  max-width: 360px;
+  width: 90%;
+  padding: 2rem;
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.maintenance-card h2 {
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+  font-size: 1.75rem;
+}
+
+.maintenance-card p {
+  margin-bottom: 1.5rem;
+  color: var(--color-dark);
+}
+
+.maintenance-card input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.maintenance-card input[type="password"]:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(157,78,221,0.3);
+}
+
+.maintenance-card button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-accent);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter .3s;
+}
+
+.maintenance-card button:hover {
+  filter: brightness(1.1);
+}
+
+.maintenance-error {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === HERO === */
+.hero {
+  background: var(--color-dark);
+  color: var(--color-text);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-cta:hover {
+  background: #7b36b4;
+}
+
+/* === SERVICES / PRESTATIONS === */
+.services {
+  padding: 4rem 2rem;
+  background: var(--color-light);
+  text-align: center;
+  color: var(--color-dark);
+}
+
+.services h2 {
+  margin-bottom: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: var(--color-bg);
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* === À PROPOS === */
+.about {
+  background: var(--color-dark);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.about h2 {
+  margin-bottom: 1.5rem;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.about-content ul {
+  list-style-type: disc;
+  margin: 1rem 0 1rem 2rem;
+}
+
+.about-content li {
+  margin-bottom: 0.5rem;
+}
+
+
+/* === CTA SECTION === */
+.cta-section {
+  padding: 4rem 2rem;
+  background: var(--color-logo-green);
+  color: white;
+  text-align: center;
+}
+
+.cta-section a.btn-cta {
+  background:white;
+  color:var(--color-logo-green);
+  padding:0.75rem 1.5rem;
+  border-radius:5px;
+  font-weight:bold;
+  transition:background 0.3s, color 0.3s;
+}
+
+.cta-section a.btn-cta:hover {
+  background:rgba(255, 255, 255, 0.8);
+  color:var(--color-logo-green);
+}
+
+.cta-section a {
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+/* === FOOTER === */
+.site-footer {
+  background: var(--color-dark);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.site-footer nav a {
+  color: white;
+  margin: 0 0.5rem;
+}
+
+/* === OVERLAY derrière le menu burger === */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3); 
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.overlay-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === GALERIE === */
+.gallery {
+  padding: 4rem 2rem;
+  background: var(--color-light);
+  text-align: center;
+  color: var(--color-dark);
+}
+
+.gallery h2 {
+  margin-bottom: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 300px; /* Hauteur fixe mais harmonieuse */
+  object-fit: cover; /* Remplissage sans déformer l'image */
+  object-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation fade-in au scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === BANNIÈRE D’ACCUEIL avec image de fond === */
+.welcome-banner {
+  position: relative;
+  background: url('/assets/images/fond.jpg') no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay-text {
+  background-color: rgba(0, 0, 0, 0.4); /* léger fond sombre pour lisibilité */
+  padding: 1rem 2rem;
+  border-radius: 8px;
+}
+
+.overlay-text p {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === SLIDER PRINCIPAL === */
+.photo-slider {
+  overflow: hidden;
+  background-color: var(--color-light);
+  position: relative;
+}
+
+.slider-container {
+  display: flex;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Supprime la scrollbar sur Chrome, Safari, Edge */
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: none; /* Garde la taille d'origine des images */
+}
+
+/* Images respectent leur taille d'origine, pas de crop */
+.slide img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 500px;
+  margin: 0;
+}
+
+/* Responsive : ajuste la hauteur max sur petits écrans */
+@media (max-width: 768px) {
+  .slide img {
+    max-height: 300px;
+  }
+}
+
+/* === FLECHES DE NAVIGATION === */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 2rem;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.7;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.7);
+  opacity: 1;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* === FOOTER SOCIAL & LAYOUT === */
+
+/* Conteneur principal du footer */
+.footer-content {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+/* Styles mobiles (tout centré et espacé) */
+.footer-copy,
+.footer-social,
+.footer-nav {
+  margin: 0.5rem 0;
+}
+
+/* Icones sociales */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer-social .social-icon {
+  color: var(--color-light);
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social .social-icon.facebook:hover {
+  color: #1877F2;
+}
+
+.footer-social .social-icon.instagram:hover {
+  color: #E1306C;
+}
+
+.footer-social .social-icon.tiktok:hover {
+  color: #000000;
+}
+
+/* Liens Contact / Mentions */
+.footer-nav a {
+  color: var(--color-light);
+  margin: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--color-logo-green);
+}
+
+/* === ESPACEMENT RÉDUIT POUR CTA & FOOTER === */
+
+/* Par défaut, on réduit légèrement le padding */
+.cta-section {
+  padding: 2rem 1rem; /* au lieu de 4rem 2rem */
+}
+
+.site-footer {
+  padding: 1.5rem 1rem; /* au lieu de 2rem */
+}
+
+/* Sur petits écrans, on compresse encore plus */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 1.5rem 0.5rem;
+  }
+  .site-footer {
+    padding: 1rem 0.5rem;
+  }
+}
+
+/* === BANNIÈRE D’ACCUEIL AVEC LOGO + TEXTE === */
+.welcome-banner {
+  position: relative;
+  background: url('/assets/images/fond.jpg') center/cover no-repeat;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;      /* Logo puis texte */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Logo dans le bandeau */
+.welcome-logo {
+  max-width: 180px;           /* ajuste selon ton logo */
+  width: 25%;                 /* 25% de la largeur, responsive */
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Texte de bienvenue */
+.welcome-text {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 1rem;             /* un peu de marge latérale */
+}
+
+/* Ajustements mobile */
+@media (max-width: 768px) {
+  .welcome-logo {
+    max-width: 140px;
+    width: 30%;
+    margin-bottom: 0.75rem;
+  }
+  .welcome-text {
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+  }
+}
+
+
+/* ===== Grand écran (>768px) ===== */
+@media (min-width: 768px) {
+  .footer-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Texte © à gauche */
+  .footer-copy {
+    text-align: left;
+    margin: 0;
+  }
+
+  /* Réseaux sociaux parfaitement centré */
+  .footer-social {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+  /* Liens à droite */
+  .footer-nav {
+    text-align: right;
+    margin: 0;
+  }
+}
+
+/* === Flèches plus discrètes sur mobile === */
+@media (max-width: 768px) {
+  .prev, .next {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background-color: rgba(0,0,0,0.3);
+    opacity: 0.5;
+  }
+
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0.8;
+  }
+}
+
+/* === RESPONSIVE GENERAL === */
+
+@media (max-width: 768px) {
+  .overlay-text p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* === ANIMATION BURGER LINKS (fade + slide) === */
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-links li {
+  opacity: 0;
+}
+
+.nav-active li {
+  animation: navLinkFade 0.5s ease forwards;
+}
+
+.nav-active li:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.nav-active li:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.nav-active li:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.nav-active li:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.nav-active li:nth-child(5) {
+  animation-delay: 1s;
+}
+
+}
+
+/* ——— ZERO GAP sous le carousel ——— */
+.about-carousel.photo-slider {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Au cas où tu aurais un container autour */
+.about-carousel.container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Assure-toi que le slider-container et les slides n’ajoutent rien */
+.about-carousel .slider-container,
+.about-carousel .slide {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Même traitement sur le main pour éviter un blanc résiduel */
+main {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Et ton footer directement dessous */
+footer.site-footer {
+  margin-top: 0 !important;
+}
+
+/* À ajouter tout à la fin de ton CSS */
+main > section:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+footer.site-footer {
+  margin-top: 0;
+}
+
+.cta-section {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* aligne verticalement si tu as plusieurs lignes */
+  flex-direction: column;  /* empile titre puis bouton */
+}
+
+.cta-section .btn-cta {
+  display: inline-block;   /* largeur naturelle */
+  margin-top: 1rem;        /* espace au-dessus */
+}
+
+/* — Overlay mobile — */
+.nav-overlay {
+  position: fixed;
+  top: 0; left: -100%;           /* cachée hors écran */
+  width: 100%; height: 100%;
+  background: var(--color-dark);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Quand le menu est ouvert */
+.nav-overlay.open {
+  left: 0;
+}
+
+/* Bouton fermer — caché quand l’overlay est fermé */
+.menu-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--color-light);
+  font-size: 2.5rem;
+  cursor: pointer;
+  opacity: 0;                     /* caché par défaut */
+  transition: opacity 0.2s ease;
+  z-index: 1001;
+}
+
+/* Affiche le × quand le menu est ouvert */
+.nav-overlay.open .menu-close {
+  opacity: 1;
+}
+
+/* Liens dans l’overlay */
+.nav-links {
+  list-style: none;
+  padding: 5rem 0 0;
+  margin: 0;
+  text-align: center;
+}
+.nav-links li + li {
+  margin-top: 1.5rem;
+}
+.nav-links a {
+  color: var(--color-light);
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+/* Burger button — visible sur mobile */
+.burger {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;                  /* au-dessus de l’overlay fermé */
+}
+.burger .line1,
+.burger .line2,
+.burger .line3 {
+  display: block;
+  width: 25px; height: 3px;
+  background: var(--color-light);
+  margin: 5px 0;
+}
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+  /* si tu as un menu desktop, cache-le ici */
+  /* .nav-links.desktop { display: none; } */
+}
+
+/* === Styliser le “burger” pour qu’il soit visible === */
+.burger {
+  display: block;              /* s’assure qu’il est affiché */
+  position: relative;
+  width: 30px;                 /* largeur du conteneur */
+  height: 24px;                /* hauteur du conteneur */
+  cursor: pointer;
+  z-index: 1100;               /* au-dessus de l’overlay fermé */
+}
+
+.burger .line1,
+.burger .line2,
+.burger .line3 {
+  display: block;
+  width: 100%;
+  height: 3px;                 /* épaisseur de chaque trait */
+  background-color: var(--color-light); /* trait blanc */
+  margin: 4px 0;               /* espacement vertical entre traits */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* === Assurer la couleur et le z-index de la croix === */
+.menu-close {
+  color: var(--color-light);   /* croix blanche */
+  font-size: 2.5rem;           /* taille confortable */
+  z-index: 1101;               /* au-dessus de tout */
+}
+
+/* Si malgré tout la croix restait cachée, on peut forcer son opacité */
+.nav-overlay.open .menu-close {
+  opacity: 1 !important;
+}

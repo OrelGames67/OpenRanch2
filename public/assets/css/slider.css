@@ -1,0 +1,73 @@
+/* == ABOUT CAROUSEL (identique à l’index) == */
+.about-carousel.photo-slider {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-light);
+    padding: 0;               /* supprime tout padding */
+  }
+  
+  .about-carousel .slider-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    
+    padding: 0;              /* supprime le padding intérieur */
+    gap: 0;                  /* annule tout gap */
+  }
+  
+  .about-carousel .slider-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .about-carousel .slide {
+    flex: none;              /* empêche le flex-grow/shrink */
+    min-width: 100%;         /* une slide = 100% du viewport */
+    height: 500px;           /* même hauteur que la home */
+    margin: 0;               /* supprime toute margin */
+  }
+  
+  .about-carousel .slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Flèches reprises de l’index */
+  .about-carousel .prev,
+  .about-carousel .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.7;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .about-carousel .prev:hover,
+  .about-carousel .next:hover {
+    background-color: rgba(0,0,0,0.7);
+    opacity: 1;
+  }
+  
+  .about-carousel .prev { left: 10px; }
+  .about-carousel .next { right: 10px; }
+  
+  /* Mobile = mêmes réglages que la home */
+  @media (max-width: 768px) {
+    .about-carousel .slide {
+      height: 300px;
+    }
+    .about-carousel .prev,
+    .about-carousel .next {
+      display: none;
+    }
+  }
