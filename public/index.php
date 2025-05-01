@@ -2,11 +2,14 @@
 
 <!-- 1. MESSAGE DE BIENVENUE -->
 <section class="welcome-banner">
-  <!-- Logo centré -->
-  <img src="/assets/images/OpenRanch2.png" alt="Open Ranch" class="welcome-logo">
+  <div class="overlay-text">
+    <!-- Logo au-dessus du texte -->
+    <img src="/assets/images/OpenRanch2.png"
+         alt="Logo Open Ranch"
+         class="welcome-logo">
 
-  <!-- Texte de bienvenue -->
-  <h1 class="welcome-text">Open Ranch vous souhaite la bienvenue</h1>
+    <p>Open Ranch vous souhaite la bienvenue</p>
+  </div>
 </section>
 
   <!-- 2. À PROPOS DE NOUS -->

@@ -1,913 +1,1595 @@
-/* === VARIABLES COULEURS === */
-:root {
-  --color-bg: #F7F3E9;
-  --color-text: #FFFFFF;
-  --color-dark: #1E1C44;          /* Bleu foncé comme Wix */
-  --color-accent: #9D4EDD;        /* Violet accent comme Wix */
-  --color-logo-green: #55AD32;    /* Vert du logo */
-  --font-body: 'Lora', serif;
-  --font-heading: 'Playfair Display', serif;
-}
+/* ================================================
+   === VARIABLES DE COULEURS & TYPOGRAPHIE ========
+   ================================================ */
+   :root {
+    /* Couleurs principales */
+    --color-bg: #F7F3E9;
+    --color-text: #FFFFFF;
+    --color-dark: #1E1C44;          /* Fond bleu foncé (header/footer) */
+    --color-accent: #9D4EDD;        /* Violet accent */
+    /* Polices */
+    --font-body: 'Lora', serif;
+    --font-heading: 'Playfair Display', serif;
+  }
+  
+  /* =========================
+     === RESET & STYLE BASE ===
+     ========================= */
+  * {
+    box-sizing: border-box;  /* Inclut padding/border dans la largeur */
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+  
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  a:hover {
+    color: var(--color-accent);
+  }
+  
+  h1, h2, h3 {
+    font-family: var(--font-heading);
+  }
 
-/* === RESET & BASE === */
-* {
-  box-sizing: border-box;
+  /* === HERO “À PROPOS” === */
+.about-hero {
+  background: var(--color-dark);
+  color: var(--color-text);
+  padding: 6rem 1rem;              /* espace plus généreux */
+  text-align: center;
+}
+.about-hero h1 {
+  font-size: 2.8rem;
+  letter-spacing: 2px;
   margin: 0;
-  padding: 0;
+}
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 4rem 1rem;
+  }
+  .about-hero h1 {
+    font-size: 2rem;
+  }
 }
 
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-bg);
+/* === TEXTE DE PRÉSENTATION === */
+.about-text {
+  background: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.6;
+  padding: 3rem 1rem;
+}
+.about-text .container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .about-text {
+    padding: 2rem 1rem;
+  }
+  .about-text p {
+    font-size: 1rem;
+  }
 }
 
-a {
+/* === GALERIE À PROPOS (3 IMAGES) === */
+.about-gallery .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes fixes */
+  gap: 1rem;                             /* espacement entre chaque */
+  max-width: 1200px;
+  margin: 0 auto;                        /* centré */
+}
+
+/* Forcer un ratio harmonieux, ici 4:3 */
+.about-gallery .gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-gallery .gallery-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* --- Adaptation responsive --- */
+@media (max-width: 992px) {
+  .about-gallery .gallery-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablettes */
+  }
+}
+@media (max-width: 600px) {
+  .about-gallery .gallery-grid {
+    grid-template-columns: 1fr;            /* 1 seule colonne sur mobile */
+  }
+}
+/* ======================================
+   === AMÉLIORATION SECTION À PROPOS ===
+   ====================================== */
+   .about-text {
+    background: var(--color-bg);        /* Même fond crème que le reste */
+    color: var(--color-dark);           /* Texte en bleu foncé pour contraste */
+    padding: 4rem 1rem;                 /* Plus d’espace autour */
+  }
+  
+  /* === CONTENEUR TEXT-CARD DYNAMIQUE === */
+  .about-text .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    /* auto-fit va créer autant de colonnes de min-width 320px qu’il y a de place */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .about-text .container > .text-card:only-child {
+    justify-self: center;
+    max-width: 600px;
+  }
+    
+  .about-text p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* === RESPONSIVE : une colonne sur petit écran === */
+  @media (max-width: 768px) {
+    .about-text {
+      padding: 2rem 1rem;
+    }
+    .about-text .container {
+      display: block;                   /* Stack en une seule colonne */
+    }
+    .about-text p {
+      font-size: 1rem;
+    }
+  }
+
+  /* ======================================
+   === CENTRER LE H1 DANS .about-hero ===
+   ====================================== */
+.about-hero .container {
+  display: block;       /* stoppe le flex hérité */
+  text-align: center;   /* centre le contenu */
+}
+
+.about-hero h1 {
+  margin: 0 auto;       /* assure un centrage horizontal */
+}
+
+/* === CTA : hauteur réduite de la section “À PROPOS” === */
+.about-hero {
+  /* passe de 6rem 1rem à 3rem 1rem */
+  padding: 2rem 1rem !important;
+}
+
+/* Ajustement responsive (si tu veux aller encore plus bas sur mobile) */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 1rem 1rem !important;
+  }
+}
+
+.site-header {
+  border-bottom: 1px solid #ccc;
+}
+/* ======================================
+   === GALLERY “MASONRY” RÉSPONSIVE =====
+   ====================================== */
+   .about-gallery {
+    padding: 4rem 1rem;
+    background: var(--color-bg);
+  }
+  .about-gallery h2 {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--color-dark);
+  }
+  .about-gallery .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Masonry à base de colonnes CSS */
+  .masonry-gallery {
+    column-count: 3;           /* 3 colonnes par défaut */
+    column-gap: 1rem;
+  }
+  .masonry-gallery img {
+    width: 100%;
+    display: inline-block;     /* nécessaire pour masonry */
+    margin-bottom: 1rem;       /* espacement vertical */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* Effet au survol */
+  .masonry-gallery img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* Responsive : 2 colonnes sur tablettes */
+  @media (max-width: 992px) {
+    .masonry-gallery {
+      column-count: 2;
+    }
+  }
+  /* Responsive : 1 colonne sur mobile */
+  @media (max-width: 600px) {
+    .masonry-gallery {
+      column-count: 1;
+    }
+  }
+
+  /* ==============================================
+   === GALERIE DESKTOP : IMAGES PLUS GRANDES ===
+   ============================================== */
+@media (min-width: 992px) {
+  .about-gallery .masonry-gallery {
+    column-count: initial;   /* désactive le masonry mobile */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes larges */
+    gap: 1.5rem;            /* un peu plus d’air entre chaque */
+    max-width: 1400px;      /* si tu veux étendre au-delà de 1200px */
+    margin: 0 auto;         /* centré dans la page */
+  }
+
+  .about-gallery .masonry-gallery img {
+    width: 100%;
+    /* ratio 4:3 pour garder un cadre harmonieux */
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    margin: 0;              /* plus de marge bottom issue du masonry */
+    transition: transform .3s, box-shadow .3s;
+  }
+}
+
+/* ===========================================
+   === AMÉLIORATION VISUELLE ABOUT-TEXT =====
+   =========================================== */
+   .about-text {
+    padding: 4rem 1rem;
+    background: var(--color-bg);
+  }
+  
+  .about-text .container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  /* ===== style des “cartes” de texte ===== */
+  .text-card {
+    background: white;                    /* contraste avec le crème */
+    padding: 2rem;
+    /*border-left: 6px solid var(--color-accent); /* trait couleur accent*/
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    color: var(--color-dark);
+    line-height: 1.8;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* petit effet “hover” pour un peu de vie */
+  .text-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  
+  /* accentuer la première ligne comme un titre implicite */
+  .text-card::first-line {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* responsive : moins de padding sur mobile */
+  @media (max-width: 768px) {
+    .about-text {
+      padding: 2rem 1rem;
+    }
+    .text-card {
+      padding: 1.5rem;
+    }
+  }
+  
+
+  /* =============================
+     === HEADER & NAVIGATION =====
+     ============================= */
+  .site-header {
+    background: var(--color-dark);
+    color: var(--color-text);
+    padding: 1rem 2rem;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;       /* Aligne logo & nav verticalement */
+    justify-content: space-between;
+  }
+  
+  /* Logo */
+  .logo {
+    height: 50px;
+  }
+  
+  /* Navigation desktop */
+  .main-nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;                 /* Espace entre chaque lien */
+  }
+  
+  .main-nav .nav-links li a {
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+  }
+  
+  /* Soulignement animé au hover */
+  .main-nav .nav-links li a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width 0.3s;
+    margin-top: 5px;
+  }
+  
+  .main-nav .nav-links li a:hover::after {
+    width: 100%;
+  }
+  
+  /* ==============
+     === BURGER ===
+     ============== */
+  .burger {
+    display: none;             /* Caché par défaut en desktop */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+    transition: all 0.3s ease;
+  }
+  
+  /* Blocage du scroll lorsque burger ouvert */
+  .no-scroll {
+    overflow: hidden;
+    height: 100vh;
+  }
+  
+  /* Animation de transformation des lignes */
+  .toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  .toggle .line2 {
+    opacity: 0;
+  }
+  .toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
+  /* ======================================
+     === NAVIGATION MOBILE (slide-in) =====
+     ====================================== */
+  @media (max-width: 768px) {
+    .burger {
+      display: flex;            /* Affiche burger en mobile */
+    }
+  
+    .nav-links {
+      position: fixed;
+      inset: 0;                 /* top/right/bottom/left = 0 */
+      background-color: var(--color-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;                /* Espacement entre les liens */
+      transform: translateX(100%); /* Hors écran par défaut */
+      transition: transform 0.5s ease-in-out;
+      z-index: 1000;
+    }
+  
+    .nav-active {
+      transform: translateX(0); /* Slide-in quand actif */
+    }
+  }
+  
+  /* =====================
+     === MAINTENANCE MODE ==
+     ===================== */
+  .maintenance-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 10000;
+    font-family: var(--font-body);
+  }
+  
+  .maintenance-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    max-width: 360px;
+    width: 90%;
+    padding: 2rem;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  
+  .maintenance-card h2 {
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    font-size: 1.75rem;
+  }
+  
+  .maintenance-card p {
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+  }
+  
+  .maintenance-card input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .maintenance-card input[type="password"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(157,78,221,0.3);
+  }
+  
+  .maintenance-card button {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: filter .3s;
+  }
+  
+  .maintenance-card button:hover {
+    filter: brightness(1.1);
+  }
+  
+  .maintenance-error {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* =================
+     === HERO BLOCK ===
+     ================= */
+  .hero {
+    background: var(--color-dark);
+    color: var(--color-text);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* ====================
+     === BOUTON CTA ===
+     ==================== */
+  .cta-section {
+    /* Force la couleur verte du logo (remplace le violet) */
+    background: #55AD32 !important;
+    color: #FFF !important;
+  }
+
+  .cta-section .btn-cta {
+    background: white !important;
+    border: 4px solid #FFF !important;   /* bordure épaissie */
+    color: #55AD32 !important;
+    /* si tu veux compenser visuellement, tu peux ajuster le padding : */
+    padding: 0.75rem 1.75rem !important;
+  }
+
+  /* Garde le padding réduit que tu as déjà */
+  .cta-section {
+    padding: 1rem 1rem !important;  /* 2rem haut/bas au lieu de 4rem */
+  }
+  
+  /* ==============================
+     === SERVICES / PRESTATIONS ===
+     ============================== */
+  .services {
+    padding: 4rem 2rem;
+    background: var(--color-light);
+    text-align: center;
+    color: var(--color-dark);
+  }
+  
+  .services h2 {
+    margin-bottom: 2rem;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .service-card {
+    background: var(--color-bg);
+    border: 1px solid #ddd;
+    padding: 2rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  /* =========================
+     === SECTION À PROPOS ===
+     ========================= */
+  .about {
+    background: var(--color-dark);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .about h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+  
+  .about-content ul {
+    list-style-type: disc;
+    margin: 1rem 0 1rem 2rem;
+  }
+  
+  .about-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ========================
+     === CTA SECTION (INDEX) ==
+     ======================== */
+  .cta-section {
+    padding: 4rem 2rem;
+    background: var(--color-accent);
+    color: white;
+    text-align: center;
+  }
+  
+  .cta-section a {
+    margin-top: 1rem;
+    display: inline-block;
+  }
+  
+  /* =========
+     === FOOTER ===
+     ========= */
+  .site-footer {
+    background: var(--color-dark);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .site-footer nav a {
+    color: white;
+    margin: 0 0.5rem;
+  }
+
+  /* ================
+   === FOOTER ===
+   ================ */
+
+/* Structure en 3 colonnes : gauche, centre, droite */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+  gap:4rem;
+}
+
+/* Copyright à gauche */
+.footer-copy {
+  flex: 1;
+  text-align: left;
+}
+
+/* Réseaux sociaux au centre */
+.footer-social {
+  flex: 1;
+  text-align: center;
+}
+.footer-social a {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
   color: var(--color-text);
-  text-decoration: none;
   transition: color 0.3s;
 }
 
-a:hover {
+/* Couleurs officielles au survol */
+.footer-social a.facebook:hover {
+  color: #1877F2;   /* Facebook Blue */
+}
+.footer-social a.instagram:hover {
+  color: #E1306C;   /* Instagram Magenta */
+}
+.footer-social a.tiktok:hover {
+  color: #000000;   /* TikTok Cyan */
+}
+
+/* Liens de droite */
+.footer-nav {
+  flex: 1;
+  text-align: right;
+}
+.footer-nav a {
+  margin: 0 0.5rem;
+  color: var(--color-text);
+  transition: color 0.3s;
+}
+.footer-nav a:hover {
   color: var(--color-accent);
 }
 
-h1, h2, h3 {
-  font-family: var(--font-heading);
-}
-
-/* === HEADER === */
-.site-header {
-  background: var(--color-dark);
-  color: var(--color-text);
-  padding: 1rem 2rem;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  height: 50px;
-}
-
-/* NAVIGATION DESKTOP */
-.main-nav .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
-
-.main-nav .nav-links li a {
-  font-size: 1rem;
-  font-weight: 500;
-  position: relative;
-}
-
-.main-nav .nav-links li a::after {
-  content: "";
-  display: block;
-  width: 0%;
-  height: 2px;
-  background: var(--color-accent);
-  transition: width 0.3s;
-  margin-top: 5px;
-}
-
-.main-nav .nav-links li a:hover::after {
-  width: 100%;
-}
-
-/* === BURGER === */
-.burger {
-  display: none;
-  cursor: pointer;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.burger div {
-  width: 25px;
-  height: 3px;
-  background-color: var(--color-text);
-  transition: all 0.3s ease;
-}
-
-/* === BLOQUE LE SCROLL quand le burger est ouvert === */
-.no-scroll {
-  overflow: hidden;
-  height: 100vh;
-}
-
-/* === ANIMATION BURGER === */
-.toggle .line1 {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-.toggle .line2 {
-  opacity: 0;
-}
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* === NAVIGATION MOBILE === */
+/* Responsive : empilement sur petits écrans */
 @media (max-width: 768px) {
-  .burger {
-    display: flex;
+  .footer-content {
+    flex-direction: column;
+  }
+  .footer-copy,
+  .footer-social,
+  .footer-nav {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ------------------------------------------------
+   🛠️  Ajustements footer pour espacement réduit
+   ------------------------------------------------ */
+
+/* 1) Padding du footer plus compact */
+.site-footer {
+  padding: 1rem 1rem !important;
+}
+
+/* 2) En mode mobile : marges très légères entre les blocs */
+@media (max-width: 768px) {
+  .footer-content {
+    /* remplace flex-direction: column par gap minimum */
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .footer-copy,
+  .footer-social,
+  .footer-nav {
+    margin-bottom: 0 !important; /* on passe à zero */
+    padding: 0.25rem 0;           /* un petit padding pour respirer */
+  }
+}
+  /* ======================================
+     === OVERLAY DERRIÈRE LE BURGER MENU ===
+     ====================================== */
+  /* Burger icon (mobile only) */
+  .burger { display: none; /* … */ }
+  @media (max-width: 768px) {
+    .burger { display: flex; }
+    /* menu caché hors écran */
+    .nav-links { transform: translateX(100%); }
+    .nav-links.nav-active { transform: translateX(0); }
   }
 
-  .nav-links {
+  /* overlay derrière le menu */
+  .nav-overlay { opacity: 0; pointer-events: none; }
+  .overlay-active { opacity: 1; pointer-events: auto; }
+
+  /* bloque le scroll */
+  .no-scroll { overflow: hidden; height: 100vh; }
+
+  /* animation des liens */
+  @keyframes navLinkFade {
+    from { opacity: 0; transform: translateX(50px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .nav-overlay {
     position: fixed;
     inset: 0;
-    background-color: var(--color-dark);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in-out;
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.3); 
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
   }
-
-  .nav-active {
-    transform: translateX(0);
+  
+  .overlay-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* ---------------------------------------------
+   Affiche la croix de fermeture uniquement
+   quand le menu burger est ouvert (& mobile)
+   --------------------------------------------- */
+@media (max-width: 768px) {
+  /* 2. Quand la liste a la classe .nav-active, on affiche la croix */
+  .main-nav .nav-links.nav-active + .menu-close {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-light);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .main-nav .nav-links.nav-active {
+    opacity: 1;
   }
 }
 
-/* === MAINTENANCE MODE === */
-.maintenance-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 10000;
-  font-family: var(--font-body);
-}
+/* ================
+   === BOUTON BURGER
+   ================ */
+   .burger {
+    display: flex;               /* visible en mobile */
+    width: 40px;                 /* zone cliquable */
+    height: 40px;
+    background: transparent;     /* fond transparent */
+    border: none;
+    cursor: pointer;
+    position: relative;          /* pour positionner les lignes */
+    z-index: 2000;               /* au-dessus de l’overlay */
+  }
+  
+  /* Les trois barres */
+  .burger div {
+    position: absolute;
+    left: 50%;
+    width: 30px;                 /* longueur de chaque ligne */
+    height: 3px;                 /* épaisseur */
+    background-color: white;     /* couleur des lignes */
+    border-radius: 2px;          /* bords arrondis */
+    transform-origin: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  /* Positions verticales initiales */
+  .burger .line1 { top: 12px; transform: translateX(-50%); }
+  .burger .line2 { top: 18px; transform: translateX(-50%); }
+  .burger .line3 { top: 24px; transform: translateX(-50%); }
+  
+  /* Lorsqu’on ajoute la classe .toggle → on forme la croix */
+  .burger.toggle .line1 {
+    top: 18px;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  .burger.toggle .line2 {
+    opacity: 0;
+  }
+  .burger.toggle .line3 {
+    top: 18px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  
+  /* Cacher le burger en desktop */
+  @media (min-width: 769px) {
+    .burger {
+      display: none;
+    }
+  }
+  
 
-.maintenance-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  max-width: 360px;
-  width: 90%;
-  padding: 2rem;
-  text-align: center;
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.maintenance-card h2 {
-  margin-bottom: 0.5rem;
-  color: var(--color-accent);
-  font-size: 1.75rem;
-}
-
-.maintenance-card p {
-  margin-bottom: 1.5rem;
-  color: var(--color-dark);
-}
-
-.maintenance-card input[type="password"] {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.maintenance-card input[type="password"]:focus {
-  outline: none;
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(157,78,221,0.3);
-}
-
-.maintenance-card button {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--color-accent);
-  border: none;
-  color: white;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: filter .3s;
-}
-
-.maintenance-card button:hover {
-  filter: brightness(1.1);
-}
-
-.maintenance-error {
-  color: #e74c3c;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
-
-@keyframes fadeInUp {
-  from {
+  
+  /* =================
+     === GALERIE ===
+     ================= */
+  .gallery {
+    padding: 4rem 2rem;
+    background: var(--color-light);
+    text-align: center;
+    color: var(--color-dark);
+  }
+  
+  .gallery h2 {
+    margin-bottom: 2rem;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gallery-grid img {
+    width: 100%;
+    height: 300px; /* Hauteur fixe mais harmonieuse */
+    object-fit: cover; /* Remplissage sans déformer l'image */
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* ======================================
+     === ANIMATION FADE-IN AU SCROLL =======
+     ====================================== */
+  .fade-in {
     opacity: 0;
     transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   }
-  to {
+  
+  .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
   }
+  
+  /* ======================================
+     === BANNIÈRE D’ACCUEIL AVEC IMAGE ===
+     ====================================== */
+  .welcome-banner {
+    position: relative;
+    background: url('/assets/images/fond.jpg') no-repeat center center/cover;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .overlay-text {
+    background-color: transparent; /* Masquage du fond */
+    padding: 1rem 2rem;
+    border-radius: 8px;
+  }
+
+  /* ===== COLONNE LOGO + TEXTE DANS LA BANNIÈRE ===== */
+.overlay-text {
+  display: flex;              /* active flexbox */
+  flex-direction: column;     /* empile verticalement */
+  align-items: center;        /* centre horizontalement */
+  text-align: center;         /* centre le texte */
 }
 
-/* === HERO === */
-.hero {
-  background: var(--color-dark);
-  color: var(--color-text);
-  padding: 5rem 2rem;
-  text-align: center;
+/* ===== STYLE DU LOGO ===== */
+.welcome-logo {
+  width: 150px;               /* ajuste la taille selon ton visuel */
+  max-width: 30%;             /* responsive si tu veux */
+  margin-bottom: 1rem;        /* espace entre logo et texte */
 }
 
-.hero h1 {
-  font-size: 2.5rem;
+  
+  .overlay-text p {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* ====================================
+     === SLIDER PRINCIPAL (INDEX) ========
+     ==================================== */
+  .photo-slider {
+    overflow: hidden;
+    background-color: var(--color-light);
+    position: relative;
+  }
+  
+  .slider-container {
+    display: flex;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .slider-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Edge */
+  }
+  
+  .slide {
+    flex: none; /* Garde taille d’origine des images */
+  }
+  
+  .slide img {
+    display: block;
+    height: auto;
+    width: auto;
+    max-height: 500px;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .slide img {
+      max-height: 300px;
+    }
+  }
+  
+  /* ============================
+     === FLECHES DE NAVIGATION ===
+     ============================ */
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 2rem;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.7;
+  }
+  
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.7);
+    opacity: 1;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .prev, .next {
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      background-color: rgba(0,0,0,0.3);
+      opacity: 0.5;
+    }
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.5);
+      opacity: 0.8;
+    }
+  }
+  
+  /* ==========================
+     === RESPONSIVE GÉNÉRAL ===
+     ========================== */
+  @media (max-width: 768px) {
+    .overlay-text p {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-grid img {
+      height: 200px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    .hero p {
+      font-size: 1rem;
+    }
+  
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    /* Animation des liens burger (fade + slide) */
+    @keyframes navLinkFade {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  
+    .nav-links li {
+      opacity: 0;
+    }
+  
+    .nav-active li {
+      animation: navLinkFade 0.5s ease forwards;
+    }
+  
+    .nav-active li:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .nav-active li:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    .nav-active li:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    .nav-active li:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+    .nav-active li:nth-child(5) {
+      animation-delay: 1s;
+    }
+  }
+  
+  /* ====== LAYOUT GLOBAL ====== */
+.legal-page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  background: var(--color-bg);
+}
+@media (max-width: 992px) {
+  .legal-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ====== NAV SIDE ====== */
+.legal-nav {
+  position: sticky;
+  top: 2rem;
+}
+.legal-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.legal-nav li + li {
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.legal-nav a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: background 0.3s;
+}
+/* == Mentions légales : liens toujours visibles == */
+.legal-nav a,
+.legal-content a {
+  color: var(--color-dark) !important;   /* couleur fixe */
+  text-decoration: none;                  /* retire soulignement si besoin */
+}
+
+.legal-nav a:hover,
+.legal-content a:hover {
+  color: var(--color-dark) !important;   /* même couleur au survol */
+  border-bottom: none;                   /* si tu veux enlever le soulignement actif */
+  background: none;                      /* si tu avais un bg au hover */
+}
+
+
+.legal-nav a:hover,
+.legal-nav a:focus,
+.legal-nav a.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ====== CONTENU ====== */
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.legal-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.legal-card h2 {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
   margin-bottom: 1rem;
+  color: var(--color-dark);
+  position: relative;
+}
+.legal-card h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--color-accent);
+}
+.legal-card p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-dark, #333);
 }
 
-.hero p {
-  font-size: 1.2rem;
+/* ====== SMOOTH SCROLL & ACTIVE LINK ====== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===========================================
+   Mentions légales – Styles pour écrans ≤992px
+   =========================================== */
+
+   @media (max-width: 992px) {
+    /* 1) Layout général : nav en sticky, contenu en dessous */
+    .legal-page {
+      display: block;          /* on rebasculle sur un flow vertical */
+      padding: 1rem;
+    }
+  
+    /* 2) Barre de navigation latérale → barre horizontale sticky */
+    .legal-nav {
+      position: sticky;
+      top: 60px;               /* ajuster selon la hauteur de ton header */
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+      margin-bottom: 1rem;
+    }
+    .legal-nav ul {
+      display: flex;
+      overflow-x: auto;
+      padding: 0.5rem 1rem;
+      margin: 0;
+    }
+    .legal-nav li {
+      flex: none;
+      margin-right: 1rem;
+    }
+    .legal-nav li:last-child {
+      margin-right: 0;
+    }
+    .legal-nav a {
+      display: block;
+      white-space: nowrap;
+      color: var(--color-dark);
+      font-weight: 500;
+      padding-bottom: 0.25rem;
+      transition: color 0.2s, border-bottom 0.2s;
+    }
+    .legal-nav a:hover {
+      color: var(--color-accent);
+    }
+    .legal-nav a.active {
+      color: var(--color-accent);
+      border-bottom: 2px solid var(--color-accent);
+    }
+  
+    /* 3) Décaler le contenu principal pour ne pas être caché */
+    .legal-content {
+      margin-top: 0;           /* nav déjà poussée par margin-bottom */
+    }
+  
+    /* 4) Cards : empilement et paddings réduits */
+    .legal-card {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+    }
+    .legal-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .legal-card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+  
+  /* === Masquer la nav des mentions légales sur mobile === */
+@media (max-width: 992px) {
+  .legal-nav {
+    display: none !important;
+  }
+  /* Et remettre le contenu à flot normal */
+  .legal-page {
+    padding-top: 1rem; /* remplace le padding-top élevé que tu avais pour la nav fixe */
+  }
+}
+/* =====================================
+   === STYLE PROFESSIONNEL FORMULAIRES ==
+   ===================================== */
+
+/* 1) Container global */
+.auth-page {
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+/* 2) La “carte” form */
+.auth-form {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  max-width: 400px;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+/* 3) Titre */
+.auth-form h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-dark);
+  text-align: center;
   margin-bottom: 2rem;
+}
+
+/* 4) Groupes de champs */
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+}
+.auth-form .form-group label {
+  display: block;
+  font-weight: 500;
+  color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+.auth-form .form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.auth-form .form-group input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(157,78,221,0.2);
+  outline: none;
+}
+
+/* 5) Messages d’erreur */
+.auth-form .errors {
+  margin-bottom: 1rem;
+  background: #fdecea;
+  border: 1px solid #f5c2c7;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+.auth-form .errors p {
+  color: #b02a37;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+/* 6) Bouton principal */
+.auth-form .btn-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  background: #55AD32;           /* vert logo */
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: filter 0.3s, transform 0.2s;
+}
+.auth-form .btn-cta:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* 7) Lien bas de formulaire */
+.auth-form .alt-action {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-dark);
+}
+.auth-form .alt-action a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+.auth-form .alt-action a:hover {
+  color: var(--color-dark);
+}
+
+/* 8) Flashs */
+.auth-form .flash {
+  margin-bottom: 1rem;
+  background: #e6f4ea;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  color: #155724;
+  font-size: 0.9rem;
+}
+
+/* 9) Responsive */
+@media (max-width: 480px) {
+  .auth-form {
+    padding: 2rem 1rem;
+  }
+  .auth-form h1 {
+    font-size: 1.75rem;
+  }
+  .auth-form .btn-cta {
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* ==============================
+   === Sticky Footer Layout  ===
+   ============================== */
+   html, body {
+    height: 100%;
+    margin: 0;            /* on s’assure qu’il n’y a pas de marge par défaut */
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;              /* prend tout l’espace disponible entre header et footer */
+  }
+  /* facultatif : si tu utilises un wrapper autour de main, applique : */
+  /* .site-wrapper { flex: 1; display: flex; flex-direction: column; } */
+  
+  /* === ALERTES GÉNÉRIQUES === */
+.alert {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* === SUCCESS === */
+.alert-success {
+  background-color: #E8F6E9;        /* vert pâle */
+  border-left: 4px solid #55AD32;   /* vert logo */
+  color: #1E4620;                   /* texte foncé */
+}
+
+/* === DANGER / ERREURS === */
+.alert-danger {
+  background-color: #FDECEA;        /* rouge pâle */
+  border-left: 4px solid #E74C3C;   /* rouge d’erreur */
+  color: #78191A;                   /* texte foncé */
+}
+
+.alert-danger li {
+  margin-left: 1.25rem;             /* indentation des points */
+  list-style-type: disc;
+}
+
+/* === Afficher / Masquer le MDP === */
+
+.password-wrapper {
+  margin-bottom: 2rem;
+}
+
+.password-wrapper {
+  position: relative;
 }
 
 .btn-cta {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-accent);
-  color: white;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s;
+  margin-top: 2rem; /* espace au-dessus du bouton */
 }
 
-.btn-cta:hover {
-  background: #7b36b4;
-}
-
-/* === SERVICES / PRESTATIONS === */
-.services {
-  padding: 4rem 2rem;
-  background: var(--color-light);
-  text-align: center;
-  color: var(--color-dark);
-}
-
-.services h2 {
-  margin-bottom: 2rem;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.service-card {
-  background: var(--color-bg);
-  border: 1px solid #ddd;
-  padding: 2rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-/* === À PROPOS === */
-.about {
-  background: var(--color-dark);
-  color: white;
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.about h2 {
-  margin-bottom: 1.5rem;
-}
-
-.about-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
-  line-height: 1.8;
-  color: var(--color-text);
-}
-
-.about-content ul {
-  list-style-type: disc;
-  margin: 1rem 0 1rem 2rem;
-}
-
-.about-content li {
-  margin-bottom: 0.5rem;
-}
-
-
-/* === CTA SECTION === */
-.cta-section {
-  padding: 4rem 2rem;
-  background: var(--color-logo-green);
-  color: white;
-  text-align: center;
-}
-
-.cta-section a.btn-cta {
-  background:white;
-  color:var(--color-logo-green);
-  padding:0.75rem 1.5rem;
-  border-radius:5px;
-  font-weight:bold;
-  transition:background 0.3s, color 0.3s;
-}
-
-.cta-section a.btn-cta:hover {
-  background:rgba(255, 255, 255, 0.8);
-  color:var(--color-logo-green);
-}
-
-.cta-section a {
-  margin-top: 1rem;
-  display: inline-block;
-}
-
-/* === FOOTER === */
-.site-footer {
-  background: var(--color-dark);
-  color: white;
-  padding: 2rem;
-  text-align: center;
-}
-
-.site-footer nav a {
-  color: white;
-  margin: 0 0.5rem;
-}
-
-/* === OVERLAY derrière le menu burger === */
-.nav-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3); 
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-.overlay-active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* === GALERIE === */
-.gallery {
-  padding: 4rem 2rem;
-  background: var(--color-light);
-  text-align: center;
-  color: var(--color-dark);
-}
-
-.gallery h2 {
-  margin-bottom: 2rem;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 0 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.gallery-grid img {
+/* On pousse le padding-right pour laisser la place à l’icône */
+.password-wrapper input {
   width: 100%;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding-right: 2.5rem;
 }
 
-.gallery-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.gallery-grid img {
-  width: 100%;
-  height: 300px; /* Hauteur fixe mais harmonieuse */
-  object-fit: cover; /* Remplissage sans déformer l'image */
-  object-position: center;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gallery-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Animation fade-in au scroll */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* === BANNIÈRE D’ACCUEIL avec image de fond === */
-.welcome-banner {
-  position: relative;
-  background: url('/assets/images/fond.jpg') no-repeat center center/cover;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.overlay-text {
-  background-color: rgba(0, 0, 0, 0.4); /* léger fond sombre pour lisibilité */
-  padding: 1rem 2rem;
-  border-radius: 8px;
-}
-
-.overlay-text p {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* === SLIDER PRINCIPAL === */
-.photo-slider {
-  overflow: hidden;
-  background-color: var(--color-light);
-  position: relative;
-}
-
-.slider-container {
-  display: flex;
-  scroll-behavior: smooth;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-}
-
-/* Supprime la scrollbar sur Chrome, Safari, Edge */
-.slider-container::-webkit-scrollbar {
-  display: none;
-}
-
-.slide {
-  flex: none; /* Garde la taille d'origine des images */
-}
-
-/* Images respectent leur taille d'origine, pas de crop */
-.slide img {
-  display: block;
-  height: auto;
-  width: auto;
-  max-height: 500px;
-  margin: 0;
-}
-
-/* Responsive : ajuste la hauteur max sur petits écrans */
-@media (max-width: 768px) {
-  .slide img {
-    max-height: 300px;
-  }
-}
-
-/* === FLECHES DE NAVIGATION === */
-.prev, .next {
+/* Le bouton icône, absolument positionné en fin d’input */
+.toggle-password {
   position: absolute;
   top: 50%;
+  right: 0.75rem;
   transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.4);
-  color: white;
+  background: none;
   border: none;
-  padding: 1rem;
   cursor: pointer;
-  z-index: 10;
-  font-size: 2rem;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-  opacity: 0.7;
+  color: var(--color-dark);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
 }
 
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.7);
-  opacity: 1;
+/* On désactive le focus outline sur le bouton, et on redonne un hint visuel */
+.toggle-password:focus {
+  outline: none;
+  color: var(--color-accent);
 }
 
-.prev {
-  left: 10px;
+
+/* 1) Même espacement sous chaque groupe de champ */
+.form-group,
+.password-group {
+  margin-bottom: 2.5rem; /* adapte à la valeur que tu utilises déjà */
 }
 
-.next {
-  right: 10px;
-}
-
-/* === FOOTER SOCIAL & LAYOUT === */
-
-/* Conteneur principal du footer */
-.footer-content {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-/* Styles mobiles (tout centré et espacé) */
-.footer-copy,
-.footer-social,
-.footer-nav {
-  margin: 0.5rem 0;
-}
-
-/* Icones sociales */
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.footer-social .social-icon {
-  color: var(--color-light);
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
-}
-
-.footer-social .social-icon.facebook:hover {
-  color: #1877F2;
-}
-
-.footer-social .social-icon.instagram:hover {
-  color: #E1306C;
-}
-
-.footer-social .social-icon.tiktok:hover {
-  color: #000000;
-}
-
-/* Liens Contact / Mentions */
-.footer-nav a {
-  color: var(--color-light);
-  margin: 0 0.5rem;
-  transition: color 0.3s ease;
-}
-
-.footer-nav a:hover {
-  color: var(--color-logo-green);
-}
-
-/* === ESPACEMENT RÉDUIT POUR CTA & FOOTER === */
-
-/* Par défaut, on réduit légèrement le padding */
-.cta-section {
-  padding: 2rem 1rem; /* au lieu de 4rem 2rem */
-}
-
-.site-footer {
-  padding: 1.5rem 1rem; /* au lieu de 2rem */
-}
-
-/* Sur petits écrans, on compresse encore plus */
-@media (max-width: 768px) {
-  .cta-section {
-    padding: 1.5rem 0.5rem;
-  }
-  .site-footer {
-    padding: 1rem 0.5rem;
-  }
-}
-
-/* === BANNIÈRE D’ACCUEIL AVEC LOGO + TEXTE === */
-.welcome-banner {
-  position: relative;
-  background: url('/assets/images/fond.jpg') center/cover no-repeat;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;      /* Logo puis texte */
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
+/* ===== Jauge de sécurité du mot de passe ===== */
+.password-strength {
+  margin-top: 0.5rem;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
   overflow: hidden;
 }
-
-/* Logo dans le bandeau */
-.welcome-logo {
-  max-width: 180px;           /* ajuste selon ton logo */
-  width: 25%;                 /* 25% de la largeur, responsive */
-  height: auto;
-  margin-bottom: 1rem;
+.password-strength .strength-bar {
+  height: 100%;
+  width: 0%;
+  background: #f00;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.strength-text {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+  color: #333;
 }
 
-/* Texte de bienvenue */
-.welcome-text {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0 1rem;             /* un peu de marge latérale */
+.strength-text.visible {
+  visibility: visible;
 }
 
-/* Ajustements mobile */
-@media (max-width: 768px) {
-  .welcome-logo {
-    max-width: 140px;
-    width: 30%;
-    margin-bottom: 0.75rem;
-  }
-  .welcome-text {
-    font-size: 1.8rem;
-    margin: 0 0.5rem;
-  }
+.password-wrapper {
+  margin-bottom: 0.25rem; /* avant : peut-être 1rem ou 0.5rem */
 }
 
 
-/* ===== Grand écran (>768px) ===== */
-@media (min-width: 768px) {
-  .footer-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  /* Texte © à gauche */
-  .footer-copy {
-    text-align: left;
-    margin: 0;
-  }
-
-  /* Réseaux sociaux parfaitement centré */
-  .footer-social {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-  }
-
-  /* Liens à droite */
-  .footer-nav {
-    text-align: right;
-    margin: 0;
-  }
+/* Texte de force du mot de passe */
+.strength-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  /* on peut le cacher par défaut si vide */
+  visibility: hidden;
+}
+.strength-text.visible {
+  visibility: visible;
 }
 
-/* === Flèches plus discrètes sur mobile === */
-@media (max-width: 768px) {
-  .prev, .next {
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    background-color: rgba(0,0,0,0.3);
-    opacity: 0.5;
-  }
+/* Styles selon le niveau */
+.strength-weak   { width: 25%; background: #e74c3c; }
+.strength-fair   { width: 50%; background: #f39c12; }
+.strength-good   { width: 75%; background: #3498db; }
+.strength-strong { width:100%; background: #2ecc71; }
 
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.5);
-    opacity: 0.8;
-  }
+/* === ALTERNATE ACTION LINKS (Inscription / Connexion) === */
+/* s’applique uniquement dans le formulaire d’authentification */
+.auth-page .alt-action {
+  text-align: center;        /* centre les deux phrases */
+  margin-top: 2rem;          /* espace au-dessus */
 }
 
-/* === RESPONSIVE GENERAL === */
-
-@media (max-width: 768px) {
-  .overlay-text p {
-    font-size: 1.5rem;
-  }
+.auth-page .alt-action p {
+  margin: 0.5rem 0;          /* écart vertical entre chaque phrase */
+  font-size: 0.95rem;        /* un peu plus petit que le texte normal */
+  color: var(--color-dark);  /* bleu foncé */
 }
 
-@media (max-width: 768px) {
-  .gallery-grid img {
-    height: 200px;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* === ANIMATION BURGER LINKS (fade + slide) === */
-@keyframes navLinkFade {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.nav-links li {
-  opacity: 0;
-}
-
-.nav-active li {
-  animation: navLinkFade 0.5s ease forwards;
-}
-
-.nav-active li:nth-child(1) {
-  animation-delay: 0.2s;
-}
-.nav-active li:nth-child(2) {
-  animation-delay: 0.4s;
-}
-.nav-active li:nth-child(3) {
-  animation-delay: 0.6s;
-}
-.nav-active li:nth-child(4) {
-  animation-delay: 0.8s;
-}
-.nav-active li:nth-child(5) {
-  animation-delay: 1s;
-}
-
-}
-
-/* ——— ZERO GAP sous le carousel ——— */
-.about-carousel.photo-slider {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Au cas où tu aurais un container autour */
-.about-carousel.container {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Assure-toi que le slider-container et les slides n’ajoutent rien */
-.about-carousel .slider-container,
-.about-carousel .slide {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Même traitement sur le main pour éviter un blanc résiduel */
-main {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Et ton footer directement dessous */
-footer.site-footer {
-  margin-top: 0 !important;
-}
-
-/* À ajouter tout à la fin de ton CSS */
-main > section:last-of-type {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-footer.site-footer {
-  margin-top: 0;
-}
-
-.cta-section {
-  display: flex;
-  justify-content: center; /* centre horizontalement */
-  align-items: center;     /* aligne verticalement si tu as plusieurs lignes */
-  flex-direction: column;  /* empile titre puis bouton */
-}
-
-.cta-section .btn-cta {
-  display: inline-block;   /* largeur naturelle */
-  margin-top: 1rem;        /* espace au-dessus */
-}
-
-/* — Overlay mobile — */
-.nav-overlay {
-  position: fixed;
-  top: 0; left: -100%;           /* cachée hors écran */
-  width: 100%; height: 100%;
-  background: var(--color-dark);
-  transition: left 0.3s ease;
-  z-index: 1000;
-  padding: 2rem 1rem;
-  box-sizing: border-box;
-}
-
-/* Quand le menu est ouvert */
-.nav-overlay.open {
-  left: 0;
-}
-
-/* Bouton fermer — caché quand l’overlay est fermé */
-.menu-close {
-  position: absolute;
-  top: 1rem; right: 1rem;
-  background: transparent;
-  border: none;
-  color: var(--color-light);
-  font-size: 2.5rem;
-  cursor: pointer;
-  opacity: 0;                     /* caché par défaut */
-  transition: opacity 0.2s ease;
-  z-index: 1001;
-}
-
-/* Affiche le × quand le menu est ouvert */
-.nav-overlay.open .menu-close {
-  opacity: 1;
-}
-
-/* Liens dans l’overlay */
-.nav-links {
-  list-style: none;
-  padding: 5rem 0 0;
-  margin: 0;
-  text-align: center;
-}
-.nav-links li + li {
-  margin-top: 1.5rem;
-}
-.nav-links a {
-  color: var(--color-light);
-  font-size: 1.25rem;
+/* lien violet, gras, sans soulignement */
+.auth-page .alt-action a {
+  color: var(--color-accent);
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
 }
 
-/* Burger button — visible sur mobile */
-.burger {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1100;                  /* au-dessus de l’overlay fermé */
-}
-.burger .line1,
-.burger .line2,
-.burger .line3 {
-  display: block;
-  width: 25px; height: 3px;
-  background: var(--color-light);
-  margin: 5px 0;
-}
-@media (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-  /* si tu as un menu desktop, cache-le ici */
-  /* .nav-links.desktop { display: none; } */
-}
-
-/* === Styliser le “burger” pour qu’il soit visible === */
-.burger {
-  display: block;              /* s’assure qu’il est affiché */
-  position: relative;
-  width: 30px;                 /* largeur du conteneur */
-  height: 24px;                /* hauteur du conteneur */
-  cursor: pointer;
-  z-index: 1100;               /* au-dessus de l’overlay fermé */
-}
-
-.burger .line1,
-.burger .line2,
-.burger .line3 {
-  display: block;
-  width: 100%;
-  height: 3px;                 /* épaisseur de chaque trait */
-  background-color: var(--color-light); /* trait blanc */
-  margin: 4px 0;               /* espacement vertical entre traits */
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* === Assurer la couleur et le z-index de la croix === */
-.menu-close {
-  color: var(--color-light);   /* croix blanche */
-  font-size: 2.5rem;           /* taille confortable */
-  z-index: 1101;               /* au-dessus de tout */
-}
-
-/* Si malgré tout la croix restait cachée, on peut forcer son opacité */
-.nav-overlay.open .menu-close {
-  opacity: 1 !important;
+/* au survol : devient bleu foncé */
+.auth-page .alt-action a:hover {
+  color: var(--color-dark);
 }

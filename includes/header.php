@@ -31,6 +31,9 @@ if (empty($_SESSION['site_unlocked'])):
         <div class="maintenance-error"><?= htmlspecialchars($maintenance_error) ?></div>
       <?php endif; ?>
       <form method="post">
+      <button type="button" class="toggle-password" aria-label="Afficher / masquer le mot de passe">
+            <i class="fas fa-eye"></i>
+          </button>
         <input type="password" name="maintenance_pwd" placeholder="Mot de passe" required>
         <button type="submit">Valider</button>
       </form>
@@ -49,18 +52,21 @@ endif;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Open Ranch</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/global.css">
-  <link rel="stylesheet" href="/assets/css/about.css">
   <!-- JS -->
   <script defer src="/assets/js/menu.js"></script>
   <script defer src="/assets/js/fade.js"></script>
   <script defer src="/assets/js/slider.js"></script>
-  <script defer src="/assets/js/about.js"></script>
+  <script defer src="/assets/js/legal-nav.js"></script>
+  <script defer src="/assets/js/register.js"></script>
+  <!-- Font Awesome : place-le AVANT tes propres CSS -->
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
 </head>
 <body>
   <header class="site-header">
@@ -73,22 +79,24 @@ endif;
       </div>
       
       <!-- Navigation -->
+      <nav class="main-nav">
         <div class="nav-overlay"></div>
-        <button class="menu-close" aria-label="Fermer le menu">×</button>
           <ul class="nav-links">
             <li><a href="https://openranch.alwaysdata.net/index.php">Accueil</a></li>
-            <li><a href="https://openranch.alwaysdata.net/about.php">À propos de nous</a></li>
-            <li><a href="https://openranch.alwaysdata.net/about.php">Prestations</a></li>
-            <li><a href="https://openranch.alwaysdata.net/actualites.php">Galeries Photos</a></li>
-            <li><a href="https://openranch.alwaysdata.net/reservation.php">Gîtes</a></li>
+            <li><a href="https://openranch.alwaysdata.net/about.php">À propos de nous </a></li>
+            <li><a href="https://openranch.alwaysdata.net/prestations.php">Prestations</a></li>
+            <li><a href="https://openranch.alwaysdata.net/albums.php">Galeries Photos</a></li>
+            <li><a href="https://openranch.alwaysdata.net/reservation.php">Réservation Gite</a></li>
+            <li><a href="https://openranch.alwaysdata.net/register.php" class="btn-nav">Inscription</a></li>
+            <li><a href="https://openranch.alwaysdata.net/login.php" class="btn-nav">Connexion</a></li>
           </ul>
 
         <!-- Menu Burger -->
         <button class="burger" aria-label="Ouvrir le menu">
-          <span class="line1"></span>
-          <span class="line2"></span>
-          <span class="line3"></span>
-        </button>
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </button>
       </nav>
     </div>
   </header>

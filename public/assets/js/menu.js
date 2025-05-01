@@ -1,27 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const burger     = document.querySelector('.burger');
-  const navOverlay = document.querySelector('.nav-overlay');
-  const closeBtn   = document.querySelector('.menu-close');
+  const body      = document.body;
+  const burger    = document.querySelector('.burger');
+  const navLinks  = document.querySelector('.main-nav .nav-links');
+  const overlay   = document.querySelector('.main-nav .nav-overlay');
+  const linkItems = document.querySelectorAll('.main-nav .nav-links li');
 
-  if (!burger || !navOverlay || !closeBtn) return;
+  if (!burger || !navLinks || !overlay) {
+    console.warn('Élément manquant pour le menu burger');
+    return;
+  }
 
-  // Ouvrir l'overlay
-  burger.addEventListener('click', () => {
-    navOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
+  function toggleMenu() {
+    const isOpening = !navLinks.classList.contains('nav-active');
 
-  // Fermer via × 
-  closeBtn.addEventListener('click', () => {
-    navOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+    // 1. Slide-in / slide-out du menu
+    navLinks.classList.toggle('nav-active', isOpening);
+    // 2. Overlay visible / masqué
+    overlay.classList.toggle('overlay-active', isOpening);
+    // 3. Burger ↔ Croix
+    burger.classList.toggle('toggle', isOpening);
+    // 4. Bloquer / débloquer le scroll
+    body.classList.toggle('no-scroll', isOpening);
 
-  // Fermer aussi quand on clique sur un lien
-  navOverlay.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navOverlay.classList.remove('open');
-      document.body.style.overflow = '';
+    // 5. Animation en cascade des liens
+    linkItems.forEach((li, idx) => {
+      if (isOpening) {
+        li.style.animation = `navLinkFade 0.5s ease forwards ${idx * 0.1 + 0.3}s`;
+      } else {
+        li.style.animation = '';
+      }
     });
+  }
+
+  // Ouvrir/fermer au clic sur le burger
+  burger.addEventListener('click', toggleMenu);
+  // Fermer au clic sur l’overlay
+  overlay.addEventListener('click', () => {
+    if (navLinks.classList.contains('nav-active')) toggleMenu();
+  });
+  // Fermer au clic sur un lien
+  linkItems.forEach(li => {
+    li.addEventListener('click', () => {
+      if (navLinks.classList.contains('nav-active')) toggleMenu();
+    });
+  });
+  // Fermer à la touche Échap
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navLinks.classList.contains('nav-active')) {
+      toggleMenu();
+    }
   });
 });
